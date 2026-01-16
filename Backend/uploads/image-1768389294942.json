@@ -1,0 +1,38 @@
+[
+	{
+		"id": "3137a312-f6a6-4402-8459-aa870b70ddbb",
+		"tote_code": "TOTE-RED-004",
+		"status": "IN_USE",
+		"bound_salesorder_id": "04802abe-7359-4bf3-a8ed-61495e94728f",
+		"bound_at": "2025-12-26 06:05:12.902+00",
+		"created_at": "2025-12-26 05:57:25.902241+00",
+		"updated_at": "2025-12-26 05:57:25.902241+00"
+	},
+	{
+		"id": "352fcc4f-f348-4211-ace8-f65a072c4da8",
+		"tote_code": "TOTE-YELLOW-001",
+		"status": "EMPTY",
+		"bound_salesorder_id": "",
+		"bound_at": "",
+		"created_at": "2025-12-26 05:57:48.131541+00",
+		"updated_at": "2025-12-26 05:57:48.131541+00"
+	},
+	{
+		"id": "621fc414-6378-4c9a-a50f-841d13da75ea",
+		"tote_code": "TOTE-RED-007",
+		"status": "EMPTY",
+		"bound_salesorder_id": "",
+		"bound_at": "",
+		"created_at": "2025-12-26 05:57:54.939304+00",
+		"updated_at": "2025-12-26 05:57:54.939304+00"
+	},
+	{
+		"id": "c39e7ee7-e35b-420f-848a-62e22c6027d4",
+		"tote_code": "TOTE-BLACK-010",
+		"status": "EMPTY",
+		"bound_salesorder_id": "",
+		"bound_at": "",
+		"created_at": "2025-12-26 05:58:20.015709+00",
+		"updated_at": "2025-12-26 05:58:20.015709+00"
+	}
+]

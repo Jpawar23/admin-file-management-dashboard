@@ -1,0 +1,104 @@
+import { useState } from 'react'
+import { ExclamationCircleIcon } from '@heroicons/react/24/outline'
+
+export default function LoginPage() {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [errors, setErrors] = useState({ email: false, password: false })
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        // Validate email and password
+        const newErrors = {
+            email: !email.includes('@'), // simple validation
+            password: password.trim() === '',
+        }
+        setErrors(newErrors)
+
+        // Stop submission if errors
+        if (!newErrors.email && !newErrors.password) {
+            alert('Login successful!') // replace with real login logic
+        }
+    }
+
+    return (
+        <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
+            {/* Card */}
+            <div className="w-full max-w-md bg-white shadow-md rounded-xl p-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Login</h2>
+
+                <form onSubmit={handleSubmit}>
+                    {/* Email field */}
+                    <div className="mb-4 text-left">
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-900">
+                            Email
+                        </label>
+                        <div className="mt-1 relative">
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                placeholder="you@example.com"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className={`block w-full rounded-md border ${errors.email ? 'border-red-300 text-red-900 placeholder-red-300' : 'border-gray-300 text-gray-900'
+                                    } bg-white py-2 px-3 pr-10 focus:outline-none focus:ring-2 ${errors.email ? 'focus:ring-red-600' : 'focus:ring-indigo-500'
+                                    } sm:text-sm`}
+                            />
+                            {errors.email && (
+                                <ExclamationCircleIcon
+                                    className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-red-500"
+                                    aria-hidden="true"
+                                />
+                            )}
+                        </div>
+                        {errors.email && (
+                            <p className="mt-2 text-sm text-red-600" id="email-error">
+                                Not a valid email address.
+                            </p>
+                        )}
+                    </div>
+
+                    {/* Password field */}
+                    <div className="mb-6 text-left">
+                        <label htmlFor="password" className="block text-sm font-medium text-gray-900">
+                            Password
+                        </label>
+                        <div className="mt-1 relative">
+                            <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                placeholder="Enter your password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className={`block w-full rounded-md border ${errors.password ? 'border-red-300 text-red-900 placeholder-red-300' : 'border-gray-300 text-gray-900'
+                                    } bg-white py-2 px-3 pr-10 focus:outline-none focus:ring-2 ${errors.password ? 'focus:ring-red-600' : 'focus:ring-indigo-500'
+                                    } sm:text-sm`}
+                            />
+                            {errors.password && (
+                                <ExclamationCircleIcon
+                                    className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-red-500"
+                                    aria-hidden="true"
+                                />
+                            )}
+                        </div>
+                        {errors.password && (
+                            <p className="mt-2 text-sm text-red-600" id="password-error">
+                                Password is required.
+                            </p>
+                        )}
+                    </div>
+
+                    {/* Sign in button */}
+                    <button
+                        type="submit"
+                        className="w-full rounded-md bg-indigo-600 py-2 px-4 text-white font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    >
+                        Sign In
+                    </button>
+                </form>
+            </div>
+        </div>
+    )
+}
