@@ -124,13 +124,10 @@ import { Navigate } from "react-router-dom"
 
 
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../utils/AuthContext";
 export default function LoginPage() {
     const navigate = useNavigate();
-    const { signIn } = useAuth();
 
     const handleLogin = () => {
-        // signIn({ email: "admin@gmail.com", password: 1234 });
         navigate("/");
     };
     return (

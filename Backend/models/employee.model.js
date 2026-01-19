@@ -4,20 +4,31 @@ const employeeSchema = new mongoose.Schema(
     {
         name: {
             type: String,
-            required: true
+            require: true,
         },
         email: {
             type: String,
-            required: true
-        },
-        phone: {
-            type: String,
-            required: true
-        },
+            required: true,
+            unique: true,
+            lowercase: true,
+            trim: true,
 
-        department: {
+        },
+        password: {
             type: String,
-            required: true
+            required: true,
+            select: false, // 🔐 password kabhi response me nahi aayega
+
+        },
+        role: {
+            type: String,
+            enum: ["admin", "user"],
+            default: "user",
+
+        },
+        isActive: {
+            type: Boolean,
+            default: true
         }
     },
     { timestamps: true }
