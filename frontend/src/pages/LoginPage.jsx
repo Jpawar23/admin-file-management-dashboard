@@ -7,6 +7,7 @@
 //     const [password, setPassword] = useState('')
 //     const [errors, setErrors] = useState({ email: false, password: false })
 
+import { useState } from "react";
 import { Navigate } from "react-router-dom"
 
 //     const handleSubmit = (e) => {
@@ -124,19 +125,54 @@ import { Navigate } from "react-router-dom"
 
 
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useAuth } from "../../utils/AuthContext";
 export default function LoginPage() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    const { signIn } = useAuth();
 
-    const handleLogin = () => {
-        navigate("/");
+
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await axios.post("http://localhost:3000/api/login", {
+                email,
+                password,
+            });
+
+            if (res.data.success) {
+                console.log("Login successful", res.data);
+                console.log("LOGIN SUCCESS BLOCK HIT");
+                console.log("Token:", res.data.token);
+                // save token 
+                localStorage.setItem("token", res.data.token);
+                // ✅ VERY IMPORTANT
+                signIn({
+                    email,
+                    token: res.data.token,
+                });
+                // redirect
+                navigate("/");
+            } else {
+                // alert(res.data.message);
+            }
+
+        } catch (err) {
+            console.error("Login error:", err.response?.data || err.message);
+            // alert("Invalid email or password");
+        }
     };
+
     return (
         <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
             {/* Card */}
             <div className="w-full max-w-md bg-white shadow-md rounded-xl p-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Login</h2>
 
-                <form>
+                <form onSubmit={handleLogin}>
                     {/* Email field */}
                     <div className="mb-4 text-left">
                         <label htmlFor="email" className="block text-sm font-medium text-gray-900 ">
@@ -147,6 +183,8 @@ export default function LoginPage() {
                                 id="email"
                                 name="email"
                                 type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 placeholder="you@example.com"
                                 className={` block w-full rounded-md border  bg-white py-2 px-3 pr-10 focus:outline-none focus:ring-2  sm:text-sm`}
                             />
@@ -165,6 +203,8 @@ export default function LoginPage() {
                                 id="password"
                                 name="password"
                                 type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Enter your password"
                                 className={`block w-full rounded-md border  bg-white py-2 px-3 pr-10 focus:outline-none focus:ring-2  sm:text-sm`}
                             />
@@ -175,9 +215,9 @@ export default function LoginPage() {
 
                     {/* Sign in button */}
                     <button
-                        type="button"
-                        // onClick={() => navigate('/files')}
-                        onClick={handleLogin}
+                        type="submit"
+
+                        // onClick={handleLogin}
                         className="w-full rounded-md bg-indigo-600 py-2 px-4 text-white font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     >
                         Sign In

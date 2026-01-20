@@ -1,19 +1,22 @@
-// AuthContext.js
-import React, { createContext, useContext, useState } from 'react';
+
+import React, { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null); // In a real app, this would check localStorage/cookies
+    //  DIRECT token read 
+    const token = localStorage.getItem("token");
 
+    const [user, setUser] = useState(
+        token ? { token } : null
+    );
     const signIn = (userData) => {
         setUser(userData);
-        // You would typically store a token in localStorage or an HttpOnly cookie here
     };
 
     const signOut = () => {
+        localStorage.removeItem("token");
         setUser(null);
-        // You would typically remove the token here
     };
 
     return (
