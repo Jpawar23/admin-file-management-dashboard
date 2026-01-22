@@ -34,11 +34,11 @@ export default function Sidebar() {
 
             {/* Logo */}
             <div className="flex h-16 items-center w-48">
-                <img
+                {/* <img
                     alt="Your Company"
                     src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
                     className="h-8 w-auto"
-                />
+                /> */}
             </div>
 
             {/* Navigation */}

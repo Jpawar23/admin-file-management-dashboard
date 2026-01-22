@@ -1,0 +1,2 @@
+id,zoho_salesorder_id,zoho_salesorder_number,source_channel,amazon_order_id,status,warehouse_code,created_at,updated_at
+04802abe-7359-4bf3-a8ed-61495e94728f,1,007,AMAZON,,PACKED,WH-01,2025-12-26 05:58:46.385285+00,2025-12-26 05:58:46.385285+00

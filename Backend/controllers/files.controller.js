@@ -6,6 +6,18 @@ const createfile = async (req, res) => {
         if (!req.file) {
             return res.status(400).json({ success: false, message: "No file uploaded" });
         }
+        // check existing file
+        const existingfile = await userdata.findOne({
+            FileName: req.file.originalname,
+            filesize: req.file.size,
+        })
+        if (existingfile) {
+            return res.status(400).json({
+                success: false,
+                message: "File already exist"
+            })
+        }
+
         // Save file info in DB
         const upload = await userdata.create({
             FileName: req.file.originalname,
